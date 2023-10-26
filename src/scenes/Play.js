@@ -128,24 +128,23 @@ class Play extends Phaser.Scene {
         if(this.round <= 2){
             if(this.checkCollision(this.p1Rocket, this.ship03)) {
                 this.p1Rocket.reset();
-                this.shipExplode(this.ship03, this.number);
                 this.number = Phaser.Math.Between(1, 4);
+                this.shipExplode(this.ship03, this.number);
             }
             if (this.checkCollision(this.p1Rocket, this.ship02)) {
                 this.p1Rocket.reset();
-                this.shipExplode(this.ship02, this.number);
                 this.number = Phaser.Math.Between(1, 4);
+                this.shipExplode(this.ship02, this.number);
             }
             if (this.checkCollision(this.p1Rocket, this.ship01)) {
                 this.p1Rocket.reset();
-                this.shipExplode(this.ship01, this.number);
                 this.number = Phaser.Math.Between(1, 4);
+                this.shipExplode(this.ship01, this.number);
             }
             if (this.checkCollision(this.p1Rocket, this.ship04)) {
                 this.p1Rocket.reset();
                 this.number = 0;
                 this.shipExplode(this.ship04, this.number);
-                this.number = Phaser.Math.Between(1, 4);
             }
         }
     }
