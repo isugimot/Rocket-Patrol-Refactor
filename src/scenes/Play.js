@@ -66,6 +66,7 @@ class Play extends Phaser.Scene {
         this.scoreRight = this.add.text(game.config.height - borderUISize - borderPadding, borderUISize + borderPadding*2, this.p2Score, scoreConfig);
         this.playerside = this.add.text(game.config.height/2, borderUISize + borderPadding*2, "PL 1", scoreConfig);
 
+        this.number = Phaser.Math.FloatBetween(1, 4);
         this.round = 1;
         this.gameOver = false;
 
@@ -127,19 +128,24 @@ class Play extends Phaser.Scene {
         if(this.round <= 2){
             if(this.checkCollision(this.p1Rocket, this.ship03)) {
                 this.p1Rocket.reset();
-                this.shipExplode(this.ship03);
+                this.shipExplode(this.ship03, this.number);
+                this.number = Phaser.Math.Between(1, 4);
             }
             if (this.checkCollision(this.p1Rocket, this.ship02)) {
                 this.p1Rocket.reset();
-                this.shipExplode(this.ship02);
+                this.shipExplode(this.ship02, this.number);
+                this.number = Phaser.Math.Between(1, 4);
             }
             if (this.checkCollision(this.p1Rocket, this.ship01)) {
                 this.p1Rocket.reset();
-                this.shipExplode(this.ship01);
+                this.shipExplode(this.ship01, this.number);
+                this.number = Phaser.Math.Between(1, 4);
             }
             if (this.checkCollision(this.p1Rocket, this.ship04)) {
                 this.p1Rocket.reset();
-                this.shipExplode(this.ship04);
+                this.number = 0;
+                this.shipExplode(this.ship04, this.number);
+                this.number = Phaser.Math.Between(1, 4);
             }
         }
     }
@@ -156,7 +162,7 @@ class Play extends Phaser.Scene {
         }
     }
 
-    shipExplode(ship) {
+    shipExplode(ship, value) {
 
         ship.alpha = 0;                         
  
@@ -174,7 +180,17 @@ class Play extends Phaser.Scene {
             this.p2Score += ship.points;
             this.scoreRight.text = this.p2Score; 
         }
+        if(value == 1){
+            this.sound.play('sfx_explosion');
+        }else if(value == 2){
+            this.sound.play('sfx_explosion2');
+        }else if(value == 3){
+            this.sound.play('sfx_explosion3');
+        }else if(value == 4){
+            this.sound.play('sfx_explosion4');
+        }else if(value == 0){
+            this.sound.play('sfx_explosion_UFO');
+        }
         
-        this.sound.play('sfx_explosion');
       }
 }
